@@ -16,6 +16,11 @@ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o
 
 echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(. /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
 
+sudo apt install ros-foxy-desktop python3-argcomplete -y 
+
+# Replace ".bash" with your shell if you're not using bash
+# Possible values are: setup.bash, setup.sh, setup.zsh
+source /opt/ros/foxy/setup.bash
 
 sudo apt update && sudo apt install -y \
   libbullet-dev \
@@ -44,10 +49,3 @@ sudo apt install --no-install-recommends -y \
 # install Cyclone DDS dependencies
 sudo apt install --no-install-recommends -y \
   libcunit1-dev
-  
-  
-sudo apt upgrade
-
-sudo rosdep init
-rosdep update
-rosdep install --from-paths src --ignore-src -y --skip-keys "fastcdr rti-connext-dds-5.3.1 urdfdom_headers"
